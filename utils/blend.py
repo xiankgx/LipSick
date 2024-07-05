@@ -36,7 +36,7 @@ def main(samelength_path, pre_blend_path):
     print('Tracking Face of Lip-synced (LipSick) video please wait..')
 
     # Call the blending function
-    blend_videos(same_length_dir, pre_blend_dir, samelength_path, pre_blend_path)
+    return blend_videos(same_length_dir, pre_blend_dir, samelength_path, pre_blend_path)
 
 def extract_frames_from_video(video_path, save_dir):
     videoCapture = cv2.VideoCapture(video_path)
@@ -111,6 +111,7 @@ def blend_videos(same_length_dir, pre_blend_dir, samelength_path, pre_blend_path
 
     # Add audio to the blended video
     final_video_path = get_versioned_filename(output_video_path.replace('_lipsick_blend.mp4', 'LipSick_Blend.mp4'))
+    # print(f">>> final_video_path: {final_video_path}")
 
     cmd = f'ffmpeg -i "{output_video_path}" -i "{pre_blend_path}" -c:v libx264 -crf 23 -c:a aac -strict experimental "{final_video_path}"'
     subprocess.call(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -121,6 +122,8 @@ def blend_videos(same_length_dir, pre_blend_dir, samelength_path, pre_blend_path
     os.remove(pre_blend_path)
     shutil.rmtree(same_length_dir)
     shutil.rmtree(pre_blend_dir)
+
+    return final_video_path
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Alpha blend two videos based on facial landmarks')

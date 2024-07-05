@@ -159,4 +159,4 @@ with gr.Blocks(css=".input_number { width: 80px; }") as iface:
             inputs=[source_video, driving_audio, custom_crop_radius, auto_mask, ref_index_1, ref_index_2, ref_index_3, ref_index_4, ref_index_5, activate_custom_frames],
             outputs=[status_text, output_video]
         )
-    iface.launch(inbrowser=True)
+    iface.launch(server_name="0.0.0.0", server_port=80, inbrowser=True)

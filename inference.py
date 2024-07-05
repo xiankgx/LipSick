@@ -239,4 +239,6 @@ if __name__ == '__main__':
             '--samelength_video_path', samelength_video_path,
             '--pre_blend_video_path', pre_blend_video_path
         ]
-        subprocess.call(cmd, shell=True)
+        # subprocess.call(cmd, shell=True)
+
+        os.system(" ".join(cmd))
